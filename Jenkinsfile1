@@ -1,13 +1,16 @@
 pipeline {
-    agent any
+    agent {label 'jdk17'}
     
-    tools {
+    /*tools {
         maven 'maven3'
         jdk 'jdk17'
-    }
+    }*/
     
     environment {
         SCANNER_HOME= tool 'sonar-scanner'
+    }
+    triggers{
+        cron('* * * * *')
     }
 
     stages {        
@@ -34,6 +37,13 @@ pipeline {
         stage('Build') {
             steps {
                 sh "mvn package"
+            }
+        }
+        stage('Deploying to nexus'){
+            steps{
+                withMaven(globalMavenSettingsConfig: 'nexus', traceability: true) {
+                sh 'mvn deploy'
+}
             }
         }
     }
