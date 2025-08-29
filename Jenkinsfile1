@@ -10,7 +10,7 @@ pipeline {
         SCANNER_HOME= tool 'sonar-scanner'
     }
     triggers{
-        cron('* * * * *')
+        pollSCM('* * * * *')
     }
 
     stages {        
