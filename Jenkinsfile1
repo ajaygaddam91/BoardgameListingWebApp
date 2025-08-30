@@ -84,7 +84,7 @@ pipeline {
             steps{
                 withDockerRegistry(credentialsId: 'docker') {
                 script{
-                sh "sudo docker push ajaygaddam91/board-game:1.0"
+                sh "docker push ajaygaddam91/board-game:1.0"
             }
 }
         }
