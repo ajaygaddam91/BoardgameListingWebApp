@@ -25,6 +25,13 @@ pipeline {
                 sh "mvn test"
             }
         }
+        stage("OWASP Check"){
+            steps{
+                sh '''
+          /home/jenkins/dependency-check/bin/dependency-check.sh --project "spring-pet-clinic" --scan .
+        '''
+            }
+        }
         
         stage('SonarQube') {
             steps {
