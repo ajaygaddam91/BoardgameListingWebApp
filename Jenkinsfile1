@@ -80,7 +80,7 @@ pipeline {
              sh 'trivy image --format table -o image-trivy.html ajaygaddam91/board-game:1.0'
         }
     }
-        stage("Build image"){
+        stage("push to DockerHub"){
             steps{
                 withDockerRegistry(credentialsId: 'docker') {
                 script{
