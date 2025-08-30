@@ -33,6 +33,9 @@ pipeline {
                 }
             }
         }
+        stage("Quality Gates"){
+            waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
+        }
         
         stage('Build') {
             steps {
