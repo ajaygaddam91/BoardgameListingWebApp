@@ -12,6 +12,9 @@ pipeline {
     triggers{
         pollSCM('* * * * *')
     }
+    /*parameters{
+        string{name:'project_name', defaultValue:'spring-pet-clinic',description:'project name for dependecny check'}
+    }*/
 
     stages {                
         stage('Compile') {
@@ -27,9 +30,8 @@ pipeline {
         }
         stage("OWASP Check"){
             steps{
-                sh '''
-          /home/jenkins/dependency-check/bin/dependency-check.sh --project "spring-pet-clinic" --scan .
-        '''
+                dependencyCheck additionalArguments:'--scan . --format html' odcinstallation: 'odc'
+                dependencyCheckPublic pattern: '' 
             }
         }
         
