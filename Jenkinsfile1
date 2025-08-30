@@ -89,12 +89,13 @@ pipeline {
 }
         }
     }
+    }
     post{
         success{
             emailext(
             to: 'ajaynair9612@gmail.com',
             subject: "Success: Job '${env.JOB_NAME} [${BUILD_NUMBER}]'",
-            body: '''<p>pipeline was successful</p>'''
+            body: '''<p>pipeline was successful and pushed to docker hub</p>'''
             )            
         }
         failure{
@@ -107,4 +108,3 @@ pipeline {
 
       }   
    }
-}
